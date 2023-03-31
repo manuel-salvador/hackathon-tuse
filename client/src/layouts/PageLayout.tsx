@@ -10,12 +10,12 @@ type Props = {
 };
 
 export default function PageLayout({ title, className, children }: Props) {
-    const tabTitle = `InvestiDAO | ${title}`;
+    const tabTitle = `Tuse | ${title}`;
     return (
         <>
             <Head>
                 <title>{tabTitle}</title>
-                <meta name="description" content="InvestiDAO app" />
+                <meta name="description" content="Tuse app" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
