@@ -2,6 +2,7 @@
     "extends": "next/core-web-vitals",
     "rules": {
         "no-unused-vars": "warn",
+        "react/self-closing-comp": "warn",
         "import/order": [
             "warn",
             {
