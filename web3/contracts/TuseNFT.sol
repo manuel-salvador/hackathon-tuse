@@ -32,10 +32,6 @@ contract TuseNFT is ERC721, Ownable {
     function setBaseURI(string memory baseURI) external onlyOwner {
         _baseURI = baseURI;
     }
-    
-    function _baseURI() internal view override returns (string memory) {
-        return _baseURI;
-    }
 
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
         require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
@@ -51,12 +47,15 @@ contract TuseNFT is ERC721, Ownable {
         } else {
             imageURI = "ipfs://cara-de-pobre";
         }
-
+        
         return string(abi.encodePacked(
             baseURI,
             idString,
+            "?image=",
+            imageURI,
             ".json"
         ));
+
     }
 
 }
