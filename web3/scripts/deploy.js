@@ -1,32 +1,44 @@
-// We require the Hardhat Runtime Environment explicitly here. This is optional
-// but useful for running the script in a standalone fashion through `node <script>`.
-//
-// You can also run a script with `npx hardhat run <script>`. If you do that, Hardhat
-// will compile your contracts, add the Hardhat Runtime Environment's members to the
-// global scope, and execute the script.
-const hre = require("hardhat");
+const { ethers } = require("hardhat");
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const unlockTime = currentTimestampInSeconds + 60;
+  // Deploy TuseDAO
+  const tuseDAOFactory = await ethers.getContractFactory("TuseDAO");
+  const tuseDAO = await tuseDAOFactory.deploy();
+  await tuseDAO.deployed();
+  console.log("TuseDAO deployed to:", tuseDAO.address);
 
-  const lockedAmount = hre.ethers.utils.parseEther("0.001");
+  // Deploy TuseVault and set TuseDAO address
+  const tuseVaultFactory = await ethers.getContractFactory("TuseVault");
+  const tuseVault = await tuseVaultFactory.deploy(tuseDAO.address);
+  await tuseVault.deployed();
+  console.log("TuseVault deployed to:", tuseVault.address);
 
-  const Lock = await hre.ethers.getContractFactory("Lock");
-  const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
-
-  await lock.deployed();
-
-  console.log(
-    `Lock with ${ethers.utils.formatEther(
-      lockedAmount
-    )}ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`
+  // Deploy TuseNFT and set TuseVault address
+  const tuseNFTFactory = await ethers.getContractFactory("TuseNFT");
+  const tuseNFT = await tuseNFTFactory.deploy(
+    "https://ipfs.io/ipfs/",
+    tuseVault.address
   );
+  await tuseNFT.deployed();
+  console.log("TuseNFT deployed to:", tuseNFT.address);
+
+  // Deploy Tuse and set TuseDAO, TuseVault, and TuseNFT addresses
+  const tuseFactory = await ethers.getContractFactory("Tuse");
+  const tuse = await tuseFactory.deploy(
+    tuseDAO.address,
+    tuseVault.address,
+    tuseNFT.address
+  );
+  await tuse.deployed();
+  console.log("Tuse deployed to:", tuse.address);
+
+  // Mint NFTs
+  await tuseNFT.mint(tuse.address);
 }
 
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
