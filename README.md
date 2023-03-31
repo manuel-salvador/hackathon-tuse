@@ -33,10 +33,8 @@ Tuse, TuseNFT, TuseDAO, TuseVault
 
 - Almacena los fondos recaudados por el minteo de NFTs y por recarga
 - Los fondos son administrados por el DAO en base a los votos realizados por los holders de uno o más NFTs
-- uint256 totalFunds Registra el total de fondos administrados por el contrato.
-- mapping(uint256 ⇒ bool) hasInvestment: Registra qué tokens están “llenos” y cuales no.
+- mapping(uint256 ⇒ unit256) balances: Registra qué tokens están “llenos” y cuales no.
 - Importante: Para mantener actualizados los balances de los usuarios a medida que crecen es implementando una función que se llame periódicamente y actualice los balances. Esto se puede lograr a través de un cronjob, que ejecuta una función en intervalos regulares de tiempo. Esto podría hacerse utilizando Cartesi. \*1
-- Opcional: hasInvestment es un mapping(uint256 ⇒ uint256) que registra el monto invertido en cada NFT.
 - Opcional: El monto invertido en cada NFT es registrado en Cartesi para ahorrar gas y evitar un error OOG
 
 ## TuseDAO
