@@ -15,18 +15,28 @@ contract TuseNFT is ERC721, Ownable {
     uint256 private _currentTokenId = 0;
     uint256 private immutable _maxTokenId;
     string private _baseURI;
+    uint256 private _mintFee = 2;
 
     constructor(string memory baseURI, TuseVault vault) ERC721("TuseNFT", "TUSE") {
         require(vault != address(0), "Vault can't be address 0x0!");
         _baseURI = baseURI;
-         _vault = vault;
-         _maxTokenId = 49;
+        _vault = vault;
+        _maxTokenId = 49;
     }
     
-    function mint(address to) external onlyOwner {
+    function mint() external payable {
         require(_currentTokenId <= _maxTokenId, "TuseNFT: All tokens have been minted");
+        require(msg.value >= 0.01 ether, "TuseNFT: Minimum investment amount not met.");
         _currentTokenId++;
-        _safeMint(to, _currentTokenId);
+        _safeMint(msg.sender, _currentTokenId);
+        uint256 mintFee = (msg.value * _mintFee) / 100;
+        _vault.deposit{value: msg.value - mintFee}();
+    }
+
+    function withdrawMintEarnings() public onlyOwner {
+        uint256 balance = address(this).balance;
+        require(balance > 0, "TuseNFT: No earnings to withdraw.");
+        payable(msg.sender).transfer(balance);
     }
     
     function setBaseURI(string memory baseURI) external onlyOwner {
@@ -47,7 +57,7 @@ contract TuseNFT is ERC721, Ownable {
         } else {
             imageURI = "ipfs://cara-de-pobre";
         }
-        
+
         return string(abi.encodePacked(
             baseURI,
             idString,
