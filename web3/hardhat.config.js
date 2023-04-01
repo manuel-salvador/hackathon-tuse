@@ -25,13 +25,10 @@ module.exports = {
   defaultNetwork: "hardhat",
   networks: {
     hardhat: {
-      chainId: 31337,
-      forking: {
-        url: MAINNET_RPC_URL,
-      },
+      chainId: 1337,
     },
     localhost: {
-      chainId: 31337,
+      chainId: 1337,
     },
     goerli: {
       url: GOERLI_RPC_URL,
