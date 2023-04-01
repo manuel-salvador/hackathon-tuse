@@ -4,6 +4,8 @@ import Image from "next/image";
 
 import HeroImage from "/public/Hero.webp";
 
+import Loading from "@/utils/Loading";
+
 import { MintNFT } from "./MintBTN";
 
 export const NFTCard = () => {
@@ -52,7 +54,7 @@ export const NFTCard = () => {
           <MintNFT />
         </div>
       ) : (
-        <p>Loading...</p>
+        <Loading />
       )}
     </div>
   );
