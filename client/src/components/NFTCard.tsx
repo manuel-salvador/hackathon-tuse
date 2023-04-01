@@ -2,6 +2,8 @@ import { Network, Alchemy } from "alchemy-sdk";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
+import HeroImage from "/public/Hero.webp";
+
 import { MintNFT } from "./MintBTN";
 
 export const NFTCard = () => {
@@ -30,15 +32,23 @@ export const NFTCard = () => {
   return (
     <div className="w-full justify-center items-center flex ">
       {loading ? (
-        <div className="flex flex-col w-6/12 justify-center items-center rounded-2xl bg-red-300">
+        <div className="flex flex-col w-6/12 justify-center items-center rounded-2xl ">
+          <Image
+            src={HeroImage}
+            alt="Hero image"
+            fill={true}
+            className="object-cover brightness-75 -z-10 rounded-b-[90%] shadow-2xl shadow-gray-900"
+            priority
+          />
           <Image
             src={nftData.rawMetadata.image}
             alt={"NFTIMAGE"}
             width={150}
-            height={100}
+            height={50}
+            className="rounded-2xl mt-3"
           />
-          <h2>{nftData.rawMetadata.name}</h2>
-          <h4>{nftData.rawMetadata.description}</h4>
+          <h1 className="mt-3">{nftData.rawMetadata.name}</h1>
+          {/* <h4>{nftData.rawMetadata.description}</h4> */}
           <MintNFT />
         </div>
       ) : (

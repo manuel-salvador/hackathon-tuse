@@ -23,7 +23,7 @@ export const MintNFT = () => {
         <button
           disabled={status === "success" || isLoading}
           onClick={() => send?.()}
-          className=" bg-slate-800  rounded-3xl hover:bg-white text-decorative-500 hover:text-slate-800 font-bold py-2 px-4 border border-decorative-500 hover:border-transparent "
+          className=" bg-slate-800 rounded-3xl hover:bg-white text-decorative-500 hover:text-slate-800 font-bold py-2 px-4 border border-decorative-500 hover:border-transparent "
         >
           Mint NFT
         </button>
