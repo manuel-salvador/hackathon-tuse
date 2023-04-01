@@ -9,7 +9,17 @@ import Loading from "@/utils/Loading";
 import { MintNFT } from "./MintBTN";
 
 export const NFTCard = () => {
-  const [nftData, setNftData] = useState();
+  const [nftData, setNftData] = useState({
+    name: "",
+    description: "",
+    image: "",
+    external_url: "",
+    rawMetadata: {
+      name: "",
+      description: "",
+      image: "",
+    },
+  });
   const [loading, setLoading] = useState(false);
   const settings = {
     apiKey: "3i8jCezRXagBt41owabyHL1nxambxJHr",
@@ -26,7 +36,6 @@ export const NFTCard = () => {
         setLoading(true);
       });
   }
-  console.log(nftData?.rawMetadata?.image, "nftData");
   useEffect(() => {
     getNftMetadata();
   }, []);
@@ -43,13 +52,13 @@ export const NFTCard = () => {
             priority
           />
           <Image
-            src={nftData.rawMetadata.image}
+            src={nftData?.rawMetadata.image}
             alt={"NFTIMAGE"}
             width={150}
             height={50}
             className="rounded-2xl mt-3"
           />
-          <h1 className="mt-3">{nftData.rawMetadata.name}</h1>
+          <h1 className="mt-3">{nftData?.rawMetadata.name}</h1>
           {/* <h4>{nftData.rawMetadata.description}</h4> */}
           <MintNFT />
         </div>
