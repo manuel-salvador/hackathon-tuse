@@ -4,7 +4,7 @@ type Props = {};
 
 export default function AboutSection({}: Props) {
     return (
-        <div className=" py-20 my-8 flex flex-col gap-6 text-center max-w-screen-xl m-auto">
+        <section className=" py-20 my-8 flex flex-col gap-6 text-center max-w-screen-xl m-auto">
             <h3 className="text-3xl font-semibold">¿Qué es Tuse?</h3>
             <p className="text-lg">
                 Tuse es una plataforma de inversión descentralizada que utiliza tecnología blockchain y NFTs (tokens no fungibles)
@@ -27,6 +27,6 @@ export default function AboutSection({}: Props) {
                 colectiva y la tecnología blockchain. En Tuse, creemos que la inversión colectiva puede ser una forma poderosa y
                 sostenible de generar valor para todos los participantes y para la sociedad en general.
             </p>
-        </div>
+        </section>
     );
 }
