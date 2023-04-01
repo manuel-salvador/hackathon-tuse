@@ -2,6 +2,7 @@ import Head from 'next/head';
 
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import StaggeredSlideFade from '@/components/StaggeredSlideFade';
 
 type Props = {
     title: string;
@@ -21,7 +22,7 @@ export default function PageLayout({ title, className, children }: Props) {
             </Head>
             <main className={`w-full ${className || ''} min-h-screen flex flex-col justify-between`}>
                 <Header />
-                {children}
+                <StaggeredSlideFade>{children}</StaggeredSlideFade>
                 <Footer />
             </main>
         </>

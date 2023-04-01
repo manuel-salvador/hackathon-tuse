@@ -4,8 +4,8 @@ type Props = {};
 
 export default function Benefits({}: Props) {
     return (
-        <div className="p-16 my-8 border-t-slate-400 overflow-hidden border-t-2 rounded-t-[200px] shadow-white max-w-screen-xl m-auto place-items-center relative">
-            <div className="h-40 w-2/3 blur-[300px] bg-cyan-400 absolute top-0 left-0 right-0 mx-auto" />
+        <section className="p-16 my-8 border-t-slate-400 overflow-hidden border-t-2 rounded-t-[200px] shadow-white max-w-screen-xl m-auto place-items-center relative">
+            <div className="h-40 w-2/3 blur-[300px] bg-info absolute top-0 left-0 right-0 mx-auto" />
             <h3 className="text-center text-3xl font-semibold">Beneficios</h3>
             <div className="grid grid-cols-list-cards gap-8 mt-16">
                 <Card title="Acceso a oportunidades de inversión exclusivas">
@@ -34,6 +34,6 @@ export default function Benefits({}: Props) {
                     invertir directamente en la plataforma de Tuse, lo que reduce los costos y aumenta las ganancias potenciales.
                 </Card>
             </div>
-        </div>
+        </section>
     );
 }

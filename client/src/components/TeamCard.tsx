@@ -8,7 +8,7 @@ type Props = {};
 
 export default function TeamCard({}: Props) {
     return (
-        <div className="w-[280px] min-h-[400px] flex flex-col bg-sky-900">
+        <div className="w-[280px] min-h-[400px] flex flex-col bg-secondary">
             <figure className="w-full h-[280px] relative">
                 <Image src={ManuProfile} alt="asd" fill className="object-cover" />
             </figure>

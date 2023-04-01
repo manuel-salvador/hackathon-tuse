@@ -7,7 +7,7 @@ type Props = {};
 
 export default function HeroSection({}: Props) {
     return (
-        <div className="w-full h-screen flex items-center justify-center ">
+        <section className="w-full h-screen flex items-center justify-center ">
             <Image
                 src={HeroImage}
                 alt="Hero image"
@@ -16,6 +16,6 @@ export default function HeroSection({}: Props) {
                 priority
             />
             <p className="w-1/2 text-center text-4xl font-extrabold">NFTs de inversión compartida gobernada por una DAO</p>
-        </div>
+        </section>
     );
 }

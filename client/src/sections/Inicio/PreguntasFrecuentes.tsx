@@ -4,7 +4,7 @@ type Props = {};
 
 export default function PreguntasFrecuentes({}: Props) {
     return (
-        <div className="w-full max-w-screen-xl mx-auto pt-16">
+        <section className="w-full max-w-screen-xl mx-auto pt-16">
             <h3 className="text-3xl font-semibold text-center mb-10">Preguntas frecuentes</h3>
             <div className="flex flex-col md:flex-row gap-8 px-16">
                 <div className="flex flex-col w-full md:w-1/2 gap-8">
@@ -17,6 +17,6 @@ export default function PreguntasFrecuentes({}: Props) {
                     <Accordion label="labeel" content="asdasdada" />
                 </div>
             </div>
-        </div>
+        </section>
     );
 }
