@@ -14,7 +14,7 @@ contract TuseNFT is ERC721, Ownable {
 
     uint256 private _currentTokenId = 0;
     uint256 private immutable _maxTokenId;
-    string private _baseURI;
+    string private _baseURIValue;
     uint256 private _mintFee = 2;
 
     constructor(string memory baseURI, TuseVault vault) ERC721("TuseNFT", "TUSE") {
@@ -40,17 +40,17 @@ contract TuseNFT is ERC721, Ownable {
     }
     
     function setBaseURI(string memory baseURI) external onlyOwner {
-        _baseURI = baseURI;
+        _baseURIValue = baseURI;
     }
 
-    function _baseURI () public view returns (string memory) {
-        return _baseURI;
+    function _baseURI () public view override returns (string memory) {
+        return _baseURIValue;
     }
 
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
         require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
 
-        string memory baseURI = _baseURI();
+        string memory baseURI = _baseURIValue();
         string memory idString = tokenId.toString();
 
         uint256 invested = _vault.getEthInvested(tokenId);
