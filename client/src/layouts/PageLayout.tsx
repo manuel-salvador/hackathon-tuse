@@ -19,7 +19,7 @@ export default function PageLayout({ title, className, children }: Props) {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <main className={`w-full ${className || ''}`}>
+            <main className={`w-full ${className || ''} min-h-screen flex flex-col justify-between`}>
                 <Header />
                 {children}
                 <Footer />

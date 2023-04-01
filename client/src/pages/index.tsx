@@ -5,7 +5,7 @@ import HeroSection from '@/sections/Inicio/HeroSection';
 import PreguntasFrecuentes from '@/sections/Inicio/PreguntasFrecuentes';
 import TeamSection from '@/sections/Inicio/TeamSection';
 
-export default function Home() {
+export default function HomePage() {
     return (
         <PageLayout title="Home">
             <HeroSection />
