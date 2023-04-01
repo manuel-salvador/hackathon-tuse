@@ -19,6 +19,9 @@ export default function Header({}: Props) {
                                 <Link href="/como-funciona">Cómo funciona</Link>
                             </li>
                             <li>
+                                <Link href="/mint">Mint NFT</Link>
+                            </li>
+                            <li>
                                 <Link href="/sobre-nosotros">Sobre nosotros</Link>
                             </li>
                         </ul>
