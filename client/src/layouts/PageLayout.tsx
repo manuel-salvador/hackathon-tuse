@@ -1,6 +1,7 @@
 import Head from 'next/head';
 
 import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 type Props = {
     title: string;
@@ -9,18 +10,19 @@ type Props = {
 };
 
 export default function PageLayout({ title, className, children }: Props) {
-    const tabTitle = `InvestiDAO | ${title}`;
+    const tabTitle = `Tuse | ${title}`;
     return (
         <>
             <Head>
                 <title>{tabTitle}</title>
-                <meta name="description" content="InvestiDAO app" />
+                <meta name="description" content="Tuse app" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <main className={`w-full ${className || ''}`}>
+            <main className={`w-full ${className || ''} min-h-screen flex flex-col justify-between`}>
                 <Header />
                 {children}
+                <Footer />
             </main>
         </>
     );

@@ -1,15 +1,11 @@
+// deploy.js
+
 const { ethers } = require("hardhat");
 
 async function main() {
-  // Deploy TuseDAO
-  const tuseDAOFactory = await ethers.getContractFactory("TuseDAO");
-  const tuseDAO = await tuseDAOFactory.deploy();
-  await tuseDAO.deployed();
-  console.log("TuseDAO deployed to:", tuseDAO.address);
-
   // Deploy TuseVault and set TuseDAO address
   const tuseVaultFactory = await ethers.getContractFactory("TuseVault");
-  const tuseVault = await tuseVaultFactory.deploy(tuseDAO.address);
+  const tuseVault = await tuseVaultFactory.deploy();
   await tuseVault.deployed();
   console.log("TuseVault deployed to:", tuseVault.address);
 
@@ -22,17 +18,13 @@ async function main() {
   await tuseNFT.deployed();
   console.log("TuseNFT deployed to:", tuseNFT.address);
 
-  // Deploy Tuse and set TuseDAO, TuseVault, and TuseNFT addresses
-  const tuseFactory = await ethers.getContractFactory("Tuse");
-  const tuse = await tuseFactory.deploy(
-    tuseDAO.address,
-    tuseVault.address,
-    tuseNFT.address
-  );
-  await tuse.deployed();
-  console.log("Tuse deployed to:", tuse.address);
+  // Deploy TuseDAO and set TuseNFT address
+  const tuseDAOFactory = await ethers.getContractFactory("TuseDAO");
+  const tuseDAO = await tuseDAOFactory.deploy(tuseNFT.address);
+  await tuseDAO.deployed();
+  console.log("TuseDAO deployed to:", tuseDAO.address);
 
-  // Mint NFTs
+  // Mint first NFTs
   await tuseNFT.mint(tuse.address);
 }
 
