@@ -1,7 +1,6 @@
 import React from 'react';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 
 type Props = {};
 
