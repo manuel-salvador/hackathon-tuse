@@ -43,6 +43,10 @@ contract TuseNFT is ERC721, Ownable {
         _baseURI = baseURI;
     }
 
+    function _baseURI () public view returns (string memory) {
+        return _baseURI;
+    }
+
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
         require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
 

@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 
 contract Vault {
     uint256 constant MIN_INVESTMENT = 0.01 ether;
-    address public constant CARTESI_ADDRESS = 0x123...; // Dirección de Cartesi
+    address public constant CARTESI_ADDRESS = 0xfBD9Ca40386A8C632cf0529bbb16b4BEdB59a0A0; // Dirección de Cartesi
     
     mapping(uint256 => uint256) public balances;
 
