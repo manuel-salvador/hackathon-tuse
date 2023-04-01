@@ -9,17 +9,7 @@ import Loading from "@/utils/Loading";
 import { MintNFT } from "./MintBTN";
 
 export const NFTCard = () => {
-  const [nftData, setNftData] = useState({
-    name: "",
-    description: "",
-    image: "",
-    external_url: "",
-    rawMetadata: {
-      name: "",
-      description: "",
-      image: "",
-    },
-  });
+  const [nftData, setNftData] = useState<any>();
   const [loading, setLoading] = useState(false);
   const settings = {
     apiKey: "3i8jCezRXagBt41owabyHL1nxambxJHr",
