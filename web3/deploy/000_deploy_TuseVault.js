@@ -3,7 +3,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
   const { deployer } = await getNamedAccounts();
 
   // this contract is upgradeable through uups (EIP-1822)
-  await deploy('TuseDAO', {
+  await deploy('TuseVault', {
     from: deployer,
     log: true,
     args: [],
@@ -21,4 +21,4 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
 };
 
 
-module.exports.tags = ['protocol_parameters'];
+module.exports.tags = ['TuseVault'];

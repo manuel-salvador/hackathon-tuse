@@ -3,34 +3,20 @@
 const { ethers } = require("hardhat");
 
 async function main() {
-  // Deploy TuseVault and set TuseDAO address
-  const tuseVaultFactory = await ethers.getContractFactory("TuseVault");
-  const tuseVault = await tuseVaultFactory.deploy();
-  await tuseVault.deployed();
-  console.log("TuseVault deployed to:", tuseVault.address);
+  const tuseNFT = await ethers.getContractAt("TuseNFT", "0x6016f36eC97d3230Fd7abaa7899053362458F0A6");
 
-  // Deploy TuseNFT and set TuseVault address
-  const tuseNFTFactory = await ethers.getContractFactory("TuseNFT");
-  const tuseNFT = await tuseNFTFactory.deploy(
-    "https://ipfs.io/ipfs/",
-    tuseVault.address
-  );
-  await tuseNFT.deployed();
-  console.log("TuseNFT deployed to:", tuseNFT.address);
+  const ownerOf1 = await tuseNFT.ownerOf(2);
+  console.log('ownerOf', ownerOf1)
+  
+  const tokenURI = await tuseNFT.tokenURI(2);
+  console.log('tokenURI', tokenURI)
 
-  // Deploy TuseDAO and set TuseNFT address
-  const tuseDAOFactory = await ethers.getContractFactory("TuseDAO");
-  const tuseDAO = await tuseDAOFactory.deploy(tuseNFT.address);
-  await tuseDAO.deployed();
-  console.log("TuseDAO deployed to:", tuseDAO.address);
 
-  // Mint first NFTs
-  await tuseNFT.mint(tuse.address);
+  const tusevault = await ethers.getContractAt('TuseVault', "0x1F63F399Ed8d54c4DCf989BE9F0362777f1c4861")
+
+  const ethInvested = await tusevault.getEthInvested(1);
+  console.log('ethInvested', ethInvested)
+
+  
 }
-
-main()
-  .then(() => process.exit(0))
-  .catch((error) => {
-    console.error(error);
-    process.exit(1);
-  });
+main();

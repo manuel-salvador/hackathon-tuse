@@ -14,12 +14,12 @@ contract TuseNFT is ERC721, Ownable {
 
     uint256 private _currentTokenId = 0;
     uint256 private immutable _maxTokenId;
-    string private _baseURIValue;
     uint256 private _mintFee = 2;
 
-    constructor(string memory baseURI, TuseVault vault) ERC721("TuseNFT", "TUSE") {
+    constructor(
+        TuseVault vault
+    ) ERC721("TuseNFT", "TUSE") {
         require(address(vault) != address(0), "Vault can't be address 0x0!");
-        _baseURIValue = baseURI;
         _vault = vault;
         _maxTokenId = 4999;
     }
@@ -38,37 +38,20 @@ contract TuseNFT is ERC721, Ownable {
         require(balance > 0, "TuseNFT: No earnings to withdraw.");
         payable(msg.sender).transfer(balance);
     }
-    
-    function setBaseURI(string memory baseURI) external onlyOwner {
-        _baseURIValue = baseURI;
-    }
-
-    function _baseURI () internal view override returns (string memory) {
-        return _baseURIValue;
-    }
 
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
         require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
-
-        string memory baseURI = _baseURI();
-        string memory idString = tokenId.toString();
 
         uint256 invested = _vault.getEthInvested(tokenId);
 
         string memory imageURI;
         if (invested > 0) {
-            imageURI = "ipfs://tiene-platita";
+            imageURI = "https://gateway.pinata.cloud/ipfs/QmPWU6ANZqaP8pcg7YAnpQ5RvfAw1G5rSVhdd4p7RJPGWz";
         } else {
-            imageURI = "ipfs://cara-de-pobre";
+            imageURI = "https://gateway.pinata.cloud/ipfs/QmQryxrkbndLYJVEknfXXyDGyfMQRZRerYDLWn62iTS32N";
         }
 
-        return string(abi.encodePacked(
-            baseURI,
-            idString,
-            "?image=",
-            imageURI,
-            ".json"
-        ));
+        return imageURI;
 
     }
 
