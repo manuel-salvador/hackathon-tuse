@@ -20,7 +20,7 @@ export const NFTCard = () => {
 
   async function getNftMetadata() {
     let res = await alchemy.nft
-      .getNftMetadata("0x7c80d72c20fae78000c1c27db9ba37f46b8434cb", 39)
+      .getNftMetadata("0x6016f36eC97d3230Fd7abaa7899053362458F0A6", 1)
       .then((response) => {
         setNftData(response);
         setLoading(true);
@@ -29,7 +29,7 @@ export const NFTCard = () => {
   useEffect(() => {
     getNftMetadata();
   }, []);
-
+  console.log(nftData);
   return (
     <div className="w-full justify-center items-center flex ">
       {loading ? (
