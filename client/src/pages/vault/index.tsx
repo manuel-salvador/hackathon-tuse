@@ -7,7 +7,7 @@ import ButtonDeposit from '@/components/Buttons/ButtonDeposit';
 type Props = {};
 
 export default function VaultPage({}: Props) {
-  const [amount, setAmount] = useState(0.01);
+  const [amount, setAmount] = useState('0.01');
 
   return (
     <PageLayout title="Vault">
