@@ -42,6 +42,9 @@ export default function Header({}: Props) {
                   <Link href="/gobernanza">Gobernanza</Link>
                 </li>
                 <li>
+                  <Link href="/vault">Vault</Link>
+                </li>
+                <li>
                   <Link href="/sobre-nosotros">Sobre nosotros</Link>
                 </li>
               </ul>
@@ -88,6 +91,9 @@ export default function Header({}: Props) {
                   </li>
                   <li>
                     <Link href="/gobernanza">Gobernanza</Link>
+                  </li>
+                  <li>
+                    <Link href="/vault">Vault</Link>
                   </li>
                   <li>
                     <Link href="/sobre-nosotros">Sobre nosotros</Link>
