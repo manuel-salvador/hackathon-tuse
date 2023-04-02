@@ -3,6 +3,10 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
+import Logo from '/public/logo.webp';
+
+import Image from 'next/image';
+
 type Props = {};
 
 export default function Header({}: Props) {
@@ -14,7 +18,9 @@ export default function Header({}: Props) {
             className="w-full fixed top-0 py-4 backdrop-blur-sm backdrop-brightness-75 z-10"
         >
             <div className="flex justify-between items-center w-full max-w-screen-xl mx-auto ">
-                <p className="text-xl font-bold">Tuse</p>
+                <figure className="h-10 w-28 relative">
+                    <Image src={Logo} className="object-contain" fill alt="Tuse logo" priority />
+                </figure>
                 <div className="flex items-center gap-8">
                     <nav>
                         <ul className="flex items-center gap-4">
@@ -26,6 +32,9 @@ export default function Header({}: Props) {
                             </li>
                             <li>
                                 <Link href="/mint">Mint NFT</Link>
+                            </li>
+                            <li>
+                                <Link href="/gobernanza">Gobernanza</Link>
                             </li>
                             <li>
                                 <Link href="/sobre-nosotros">Sobre nosotros</Link>
