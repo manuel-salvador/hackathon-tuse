@@ -8,7 +8,7 @@ import {
   getDefaultWallets,
 } from "@rainbow-me/rainbowkit";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
-import { mainnet, polygon, goerli, polygonMumbai } from "wagmi/chains";
+import { goerli, polygonMumbai } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 

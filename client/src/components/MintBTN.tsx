@@ -1,7 +1,7 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { usePrepareContractWrite, useAccount, useContractWrite } from "wagmi";
 export const MintNFT = () => {
-  const { address, isConnected } = useAccount();
+  const { isConnected } = useAccount();
   const { config } = usePrepareContractWrite({
     address: "0x9d4c4a7f4c0d8e7b4a4b0e6b5d7b9f9c8b1d2c1d",
     abi: [
