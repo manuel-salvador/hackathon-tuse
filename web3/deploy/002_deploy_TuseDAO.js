@@ -2,25 +2,17 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
   const { deploy } = deployments;
   const { deployer } = await getNamedAccounts();
 
-  const parseAmount = (amount) => ethers.utils.parseEther(amount);
-
   // this contract is upgradeable through uups (EIP-1822)
-  await deploy('ProtocolParameters', {
+  await deploy('TuseDAO', {
     from: deployer,
     log: true,
-    args: [],
-    proxy: {
-      proxyContract: 'UUPSProxy',
-      execute: {
-        init: {
-          methodName: 'initialize',
-          args: [1000000, 1000, deployer],
-        },
-      },
-    },
+    args: [
+      "0x1F63F399Ed8d54c4DCf989BE9F0362777f1c4861",
+      1000000
+    ]
   });
 
 };
 
 
-module.exports.tags = ['protocol_parameters'];
+module.exports.tags = ['tuse_dao'];

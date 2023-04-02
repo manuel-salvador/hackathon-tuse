@@ -1,4 +1,5 @@
 require("@nomiclabs/hardhat-waffle");
+require("@nomiclabs/hardhat-ethers");
 require("hardhat-gas-reporter");
 require("@nomiclabs/hardhat-etherscan");
 require("dotenv").config();
@@ -10,15 +11,11 @@ require("hardhat-deploy");
  * @type import('hardhat/config').HardhatUserConfig
  */
 
-const MAINNET_RPC_URL =
-  process.env.MAINNET_RPC_URL || process.env.ALCHEMY_MAINNET_RPC_URL || "";
 const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY || "";
-const GOERLI_RPC_URL =
-  process.env.GOERLI_RPC_URL ||
-  "https://eth-goerli.alchemyapi.io/v2/your-api-key";
+const GOERLI_RPC_URL = "https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161";
 const PRIVATE_KEY =
   process.env.PRIVATE_KEY ||
-  "0x11ee3108a03081fe260ecdc106554d09d9d1209bcafd46942b10e02943effc4a";
+  "ef4616a07fbe32d5c2f29c9a1cb857ac24968bd6c53e15dc255ec3085c47e1e8";
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || "";
 
 module.exports = {
@@ -33,8 +30,6 @@ module.exports = {
     goerli: {
       url: GOERLI_RPC_URL,
       accounts: [PRIVATE_KEY],
-      chainId: 5,
-      blockConfirmations: 6,
     },
   },
   solidity: {
