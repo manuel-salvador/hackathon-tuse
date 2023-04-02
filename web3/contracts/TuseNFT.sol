@@ -21,7 +21,7 @@ contract TuseNFT is ERC721, Ownable {
         require(address(vault) != address(0), "Vault can't be address 0x0!");
         _baseURIValue = baseURI;
         _vault = vault;
-        _maxTokenId = 49;
+        _maxTokenId = 4999;
     }
     
     function mint() external payable {
