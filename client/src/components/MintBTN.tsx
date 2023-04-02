@@ -1,35 +1,41 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { usePrepareContractWrite, useAccount, useContractWrite } from 'wagmi';
+import { ethers } from 'ethers';
+
+import abi from '../utils/TuseDAO.json';
 export const MintNFT = () => {
-    const { address, isConnected } = useAccount();
-    const { config } = usePrepareContractWrite({
-        address: '0x9d4c4a7f4c0d8e7b4a4b0e6b5d7b9f9c8b1d2c1d',
-        abi: [
-            {
-                inputs: [{}],
-                name: 'mintNFT',
-                outputs: [],
-                stateMutability: 'nonpayable',
-                type: 'function',
-            },
-        ],
-        functionName: 'mintNFT',
-        args: [],
-    });
-    const { write: send, status, isLoading } = useContractWrite(config);
-    return (
-        <div className="flex ">
-            {isConnected ? (
-                <button
-                    disabled={status === 'success' || isLoading}
-                    onClick={() => send?.()}
-                    className=" bg-slate-800 rounded-3xl hover:bg-white text-decorative-500 hover:text-slate-800 font-bold py-2 px-4 border border-decorative-500 hover:border-transparent "
-                >
-                    Mint NFT
-                </button>
-            ) : (
-                <ConnectButton label="Conectar wallet y mintear" />
-            )}
-        </div>
-    );
+  const { address, isConnected } = useAccount();
+  const { config } = usePrepareContractWrite({
+    address: '0x6016f36eC97d3230Fd7abaa7899053362458F0A6',
+    overrides: {
+      value: ethers.BigNumber.from('100000000000000000'),
+      from: address,
+    },
+    abi: [
+      {
+        inputs: [],
+        name: 'mint',
+        outputs: [],
+        stateMutability: 'payable',
+        type: 'function',
+      },
+    ],
+    functionName: 'mint',
+  });
+  const { write: send, status, isLoading } = useContractWrite(config);
+  return (
+    <div className="flex ">
+      {isConnected ? (
+        <button
+          disabled={status === 'success' || isLoading}
+          onClick={() => send?.()}
+          className=" bg-slate-800 rounded-3xl hover:bg-white text-decorative-500 hover:text-slate-800 font-bold py-2 px-4 border border-decorative-500 hover:border-transparent "
+        >
+          Mint NFT
+        </button>
+      ) : (
+        <ConnectButton label="Connect your wallet and mint" />
+      )}
+    </div>
+  );
 };
