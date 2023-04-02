@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
+import Image from 'next/image';
 
 import PageLayout from '@/layouts/PageLayout';
 import ButtonWithdraw from '@/components/Buttons/ButtonWithdraw';
 import ButtonDeposit from '@/components/Buttons/ButtonDeposit';
+
+import TuseHappy from '/public/tuse-happy.jpg';
+import TuseSad from '/public/tuse-sad.jpg';
 
 type Props = {};
 
@@ -13,7 +17,9 @@ export default function VaultPage({}: Props) {
     <PageLayout title="Vault">
       <div className="mt-28 flex flex-col md:flex-row gap-8 w-full max-w-screen-xl mx-auto">
         <div className="border p-8 flex-1 flex flex-col items-center gap-8">
-          <div className="w-40 h-40 bg-gray-600">image</div>
+          <div className="w-40 h-40 bg-gray-600">
+            <Image src={TuseHappy} alt="tuse feliz" />
+          </div>
           <div className="flex flex-col gap-1">
             <label htmlFor="amount">Monto (ETH)</label>
             <input
@@ -30,7 +36,9 @@ export default function VaultPage({}: Props) {
           <ButtonDeposit />
         </div>
         <div className="border p-8 flex-1 flex flex-col items-center gap-8">
-          <div className="w-40 h-40 bg-gray-600">image</div>
+          <div className="w-40 h-40 bg-gray-600">
+            <Image src={TuseSad} alt="Tuse sad" />
+          </div>
           <div className="text-center">
             <p>Monto a retirar</p>
             <p>2.4 ETH</p>

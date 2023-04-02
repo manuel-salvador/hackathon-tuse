@@ -8,7 +8,7 @@ export const MintNFT = () => {
   const { config } = usePrepareContractWrite({
     address: '0x6016f36eC97d3230Fd7abaa7899053362458F0A6',
     overrides: {
-      value: ethers.BigNumber.from('1000000000000000'),
+      value: ethers.utils.parseEther('0.01'),
       from: address,
       gasLimit: ethers.BigNumber.from('1000000'),
     },
