@@ -29,7 +29,7 @@ export const NFTCard = () => {
   useEffect(() => {
     getNftMetadata();
   }, []);
-  console.log(nftData);
+
   return (
     <div className="w-full justify-center items-center flex ">
       {loading ? (
