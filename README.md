@@ -10,11 +10,7 @@ En resumen, es posible hacer un proyecto base que incluya los contratos Tuse, Tu
 
 # Contratos:
 
-Tuse, TuseNFT, TuseDAO, TuseVault
-
-## Tuse
-
-- Coordinador de comunicación entre TuseDAO, TuseNFT y TuseVault
+TuseNFT, TuseDAO, TuseVault
 
 ## TuseNFT
 
@@ -59,3 +55,12 @@ La DAO decide cómo se generan rendimientos con el ETH de TuseVault, para que to
 Para hacer esto, sería necesario implementar una estructura de datos que almacene los detalles de las inversiones realizadas por cada usuario, incluyendo el monto invertido, el tipo de plataforma y la tasa de interés. Luego, la función "updateBalances" leería estos datos y actualizaría los balances de los usuarios en consecuencia.
 
 Otra opción sería usar un oráculo que proporcione datos en tiempo real sobre las ganancias generadas por las inversiones en otras plataformas y actualizar los balances en consecuencia. Esto permitiría mantener los balances de los usuarios actualizados en tiempo real sin la necesidad de ejecutar una función periódica.
+
+# Roadmap (cambios pendientes)
+
+- La función withdraw retira el porcentaje de lso fondos totales invertidos de el/los vaults donde se encuentran invertidos, calculando el monto a enviar al dueño de el/los NFTs.
+- Agregar un cálculo de ganancias similar al de staking que requiera solo actualizar una variable para actualizar el monto que corresponde a cada inversor, y que esto se refleje en el frontend.
+- Hacer que el DAO pueda proponer y ejecutar en qué monedas, NFTs, pares de liquidez (LP) u otros instrumentos financieros DeFI se invierten. Podria hacer referencia a un array dinámico que incluya structs con la dirección del contrato donde se invertira y el signature de la función a llamar para invertir, y para retirar ganancias
+- Agregar función que actualice periódicamente los balances de todos los address teniendo en cuenta los intereses generados por lending/staking. Está función puede ser llamada periódicamente por un script o idealmente por Cartesi. El frontend debería mostrar una cuenta regresiva para la próxima actualización.
+- Agregar funcion compound() al contrato TuseVault para reinvertir las ganancias generadas, y así generar el efecto "bola de nieve" del interés compartido.
+- Implementar Cartesi para automatizar el chequeo de los balances invertidos, actualizarlos en el contrato, ejecutar el compound periodicamente, y la ejecución de los proposals.

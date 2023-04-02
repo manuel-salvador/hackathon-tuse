@@ -1,20 +1,26 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { usePrepareContractWrite, useAccount, useContractWrite } from "wagmi";
+import { ethers } from "ethers";
+
+import abi from "../utils/TuseDAO.json";
 export const MintNFT = () => {
   const { address, isConnected } = useAccount();
   const { config } = usePrepareContractWrite({
-    address: "0x9d4c4a7f4c0d8e7b4a4b0e6b5d7b9f9c8b1d2c1d",
+    address: "0x6016f36eC97d3230Fd7abaa7899053362458F0A6",
+    overrides: {
+      value: ethers.BigNumber.from("100000000000000000"),
+      from: address,
+    },
     abi: [
       {
-        inputs: [{}],
-        name: "mintNFT",
+        inputs: [],
+        name: "mint",
         outputs: [],
-        stateMutability: "nonpayable",
+        stateMutability: "payable",
         type: "function",
       },
     ],
-    functionName: "mintNFT",
-    args: [],
+    functionName: "mint",
   });
   const { write: send, status, isLoading } = useContractWrite(config);
   return (
