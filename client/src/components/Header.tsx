@@ -33,7 +33,11 @@ export default function Header({}: Props) {
                   <Link href="/">Inicio</Link>
                 </li>
                 <li>
-                  <Link href="/como-funciona">Cómo funciona</Link>
+                  <a
+                    href="https://www.canva.com/design/DAFe9iaFfJA/QzSI0FJK0JcLuPFYHybPbw/edit?utm_content=DAFe9iaFfJA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
+                    target="_blank"
+                    referrerPolicy="no-referrer"
+                  />
                 </li>
                 <li>
                   <Link href="/mint">Mint NFT</Link>
@@ -84,7 +88,11 @@ export default function Header({}: Props) {
                     <Link href="/">Inicio</Link>
                   </li>
                   <li>
-                    <Link href="/como-funciona">Cómo funciona</Link>
+                    <a
+                      href="https://www.canva.com/design/DAFe9iaFfJA/QzSI0FJK0JcLuPFYHybPbw/edit?utm_content=DAFe9iaFfJA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
+                      target="_blank"
+                      referrerPolicy="no-referrer"
+                    />
                   </li>
                   <li>
                     <Link href="/mint">Mint NFT</Link>
