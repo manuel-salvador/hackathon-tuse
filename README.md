@@ -14,23 +14,33 @@ TuseNFT, TuseDAO, TuseVault
 
 ## TuseNFT
 
-- mapping(address ⇒ uint256) tokenCount: Almacena la cantidad de NFT de cada address, de donde se leerá luego cuantos votos tiene cada address en el DAO
-- mint() El monto pagado al mintear es de 0.01 ETH, y ese monto es enviado a TuseVault, de donde luego será administrado ese monto por TuseDAO.
-- withdrawFromNFT(): El monto pagado puede redimirse en caso de querer retirar el ETH bloqueado en el NFT si el NFT está “lleno”. .
-- depositToNFT(): Se puede volver a invertir el monto de minteo en el NFT para participar nuevamente de la inversión compartida.
-- tokenURI: La imagen del NFT podría ser un cofre del tesoro que está lleno de cosas cuando el NFT está cargado, y vacío cuando fue vaciado.
-- Cada NFT equivale a un voto en TuseDAO.
-- Sólo se pueden mintear 50, para evitar errores OOG y cuidar el consumo de gas.
-- Opcional: A cada nft se le puede agregar una inversión adicional, que lo hace valer más y suma al total de dinero manejado por el contrato en total. Como si cada nft fuera un certificado de haber invertido tanta $ en un pool de inversión gobernado entre todos.
-- Opcional: El contrato podría tener un mínimo de Ether que deba estar invertido en él para mostrarse lleno, para disuadir a los scammers de vaciarlo y luego revenderlo con muy pocos fondos para que parezca lleno.
-- Opcional: El contrato de NFT incluye el ERC de los royalties para generar más ingresos al owner, y cada NFT capaz se valorizaría más allá de su valor bloqueado, por el acceso a la DAO, el diseño del NFT, la comunidad que tengan, etc (humo de NFT)
+El contrato TuseNFT es un contrato de NFT (token no fungible) que permite a los usuarios mintear un token NFT único. El contrato también está conectado a otro contrato llamado TuseVault.
+
+El contrato TuseNFT tiene las siguientes características:
+
+- El constructor toma dos argumentos: baseURI y vault, donde baseURI es la URL base para obtener los URI de los tokens y vault es la dirección del contrato TuseVault.
+- La función mint permite a los usuarios mintear un token NFT único.
+- El contrato TuseNFT está limitado a un número máximo de tokens NFT que se pueden mintear.
+- La función setBaseURI permite al propietario del contrato cambiar la URL base para obtener los URI de los tokens.
+- La función tokenURI devuelve el URI del token en función de su tokenId.
+- El contrato también tiene una función withdrawMintEarnings que permite al propietario del contrato retirar las ganancias acumuladas de las minteadas de tokens NFT.
+
+En resumen, TuseNFT es un contrato NFT que permite a los usuarios mintear un token NFT único, y se conecta con el contrato TuseVault para depositar las ganancias obtenidas de las minteadas. Además, el propietario del contrato puede cambiar la URL base para obtener los URI de los tokens y retirar las ganancias acumuladas de las minteadas de tokens NFT.
 
 ## TuseVault
 
-- Almacena los fondos recaudados por el minteo de NFTs y por recarga
-- Los fondos son administrados por el DAO en base a los votos realizados por los holders de uno o más NFTs
-- mapping(uint256 ⇒ unit256) balances: Registra qué tokens están “llenos” y cuales no.
+contrato que permite a los usuarios depositar y retirar fondos en relación a los NFT creados por el contrato TuseNFT.
+
+El contrato TuseVault tiene una constante MIN_INVESTMENT que define el mínimo de ether que se debe depositar en un NFT para que se registre el balance en el contrato. También hay una dirección constante CARTESI_ADDRESS, que es la dirección del contrato de Cartesi que se utiliza para verificar que solo Cartesi pueda actualizar el balance.
+
+Hay una función deposit() que permite a los usuarios depositar fondos en un NFT, y también hay una función withdraw() que permite a los usuarios retirar sus fondos de un NFT en particular. Ambas funciones necesitan el ID del token para funcionar.
+
+El contrato también tiene una función updateBalance() que solo puede ser llamada por Cartesi, y que se utiliza para actualizar los balances de todos los NFT.
+
+Finalmente, hay una función getEthInvested() que se utiliza en el contrato TuseNFT para obtener la cantidad de ether que se ha invertido en un NFT en particular.
+
 - Importante: Para mantener actualizados los balances de los usuarios a medida que crecen es implementando una función que se llame periódicamente y actualice los balances. Esto se puede lograr a través de un cronjob, que ejecuta una función en intervalos regulares de tiempo. Esto podría hacerse utilizando Cartesi. \*1
+
 - Opcional: El monto invertido en cada NFT es registrado en Cartesi para ahorrar gas y evitar un error OOG
 
 ## TuseDAO
@@ -39,8 +49,13 @@ La DAO decide cómo se generan rendimientos con el ETH de TuseVault, para que to
 
 - Administra los fondos de TuseVault en base a lo votado por los holders de TuseNFT.
 - Decide en qué staking/lending donde se invierte 50% del total de fondos. En caso de no haber suficientes fondos no invertidos, se retira la inversión más antigua y se colocan esos fondos en el nuevo staking/lending.
-- Tiene un tiempo de 48 horas para determinar el resultado de cada votación.
 - Opcional: Utilizar Cartesi para automatizar el compounding cada determinado tiempo, y la ejecución de las acciones votadas.
+
+contrato inteligente que implementa un modelo de gobernanza descentralizada para la comunidad de TuseNFT. Permite a los propietarios de TuseNFT votar en las propuestas y decisiones importantes que afectan a la comunidad.
+
+El funcionamiento es el siguiente: los usuarios pueden crear propuestas, que pueden ser cualquier cosa desde cambios en las reglas de la comunidad hasta la asignación de fondos para financiar un nuevo proyecto. Luego, los usuarios que poseen TuseNFT pueden votar a favor o en contra de las propuestas utilizando sus tokens. Las votaciones se realizan durante un período determinado de tiempo y al final se determina si la propuesta ha sido aprobada o no según la mayoría de votos. Si la propuesta es aprobada, se ejecuta automáticamente.
+
+TuseDAO permite una toma de decisiones descentralizada y transparente, en la que todos los usuarios de la comunidad tienen voz y voto en las decisiones importantes. Con este modelo de gobernanza, se busca fomentar una comunidad más comprometida y participativa en el desarrollo de TuseNFT.
 
 ## Frontend
 
